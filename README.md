@@ -15,5 +15,6 @@
  * Then the Guess_the_Phrase javascript game will appear on the default browser tab
  ## Acknowledgement:
  1. TeamTreehouse [https://teamtreehouse.com/]
+ 2. RANDOM USER GENERATOR API [https://randomuser.me/]
 
  
