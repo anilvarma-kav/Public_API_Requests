@@ -1,3 +1,8 @@
+/* =====================================
+   Public API Request
+   ANIL VARMA KEERTHIPATI
+======================================== */
+
 const card = document.querySelector('.gallery');
 const search = document.querySelector(".search-container");
 let selectedcardId = 0;
