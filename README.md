@@ -9,7 +9,9 @@
  * Making API Requests
  * Asynchronously Handling the data using Javascript promises
  
- #### CSS STYLE CHANGES MADE: 
+ ####Search feature added:
+ Now users can search the employees by typing name in the search field. The list will be filtered if any key is pressed or even by clicking search button provided.
+ #### CSS changes made: 
  * body {
      background: #0074D9;
  }
