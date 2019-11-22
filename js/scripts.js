@@ -3,25 +3,44 @@
    ANIL VARMA KEERTHIPATI
 ======================================== */
 
+//Selecting the elements from document
 const card = document.querySelector('.gallery');
 const search = document.querySelector(".search-container");
+const formSubmit = document.getElementsByTagName('form');
+
+//Global variables to track selectedCard and activecards on screen
 let selectedcardId = 0;
 let employees_info = [];
 let activeCardIds = [];
-const formSubmit = document.getElementsByTagName('form');
 
+// To display error message on screen
+function displayError(err) {
+    document.querySelector('.header-text-container > h1').textContent = "Something Went Wrong, Come back later. "+ err;
+}
 
+//single fetch request to the random user API to get 12 random employees data with nationalty as US in JSON formot
+fetch("https://randomuser.me/api/?nat=us&results=12")
+    .then(res => res.json())
+    .then(jsonData => createEmployeeCards(jsonData.results))
+    .catch(err => displayError(err));
+
+//Adding Seacrh tool
 const searchHTML = `
     <form action="#" method="get">
          <input type="search" id="search-input" class="search-input" placeholder="Search...">
          <input type="submit" value="&#x1F50D;" id="search-submit" class="search-submit">
     </form>
 `;
-
 search.innerHTML = searchHTML;
+
+// Search tool works even if a key is pressed and also if a form is submitted.
 formSubmit[0].addEventListener('submit', filter);
 const searchText = document.getElementById('search-input');
 searchText.addEventListener('keyup', filter);
+
+/**
+ * Used to filter the employee cards on screen based on the text entered in search field.
+ */
 function filter() {
     const text = searchText.value.toLowerCase();
     const activeCards = document.querySelectorAll('.card-name');
@@ -38,27 +57,21 @@ function filter() {
             parentDiv.style.display = "none";
         }
     });
-   // console.log(activeCards);
-    console.log(text);
-
-
 }
 
 
-fetch("https://randomuser.me/api/?nat=us&results=100")
-    .then(res => res.json())
-    .then(jsonData => createEmployeeCards(jsonData.results));
-
-
+//Creating employee cards by passing each employee object to creatCard() function and also employee object to employees_info[] array
 function createEmployeeCards(employers) {
-    // console.log(employers);
     employers.forEach(employer => {
         employees_info.push(employer);
         createCard(employer);
     });
 }
 
+// Using i variable to add id's each employee card. These id's will be used for navigation of employee cards
 let i = 0;
+
+//createCard(employer) creates a card for employer
 function createCard(employer) {
     let childdiv = document.createElement('div');
     childdiv.className = "card";
@@ -79,8 +92,10 @@ function createCard(employer) {
         card.append(childdiv);
 }
 
+//If any part of the card clicked selectdCard() function will be called
 card.addEventListener('click', selectedCard);
 
+//Gets the ID of the clicked card div and sends it to createModal() function
 function selectedCard(e) {
     if (e.target.closest(".card")) {
         const selectedCard = e.target.closest(".card");
@@ -89,9 +104,9 @@ function selectedCard(e) {
     }
 }
 
+// Creates the modal for the selected employee
 function createModal(selectedcardId) {
         const selectedEmployer = employees_info[selectedcardId];
-        //console.log(selectedEmployer);
         let childdiv = document.createElement('div');
         childdiv.className = "modal-container";
         const dob = new Date(selectedEmployer.dob.date);
@@ -118,6 +133,10 @@ function createModal(selectedcardId) {
         document.body.appendChild(childdiv);
 }
 
+// continuosly listen's for clicks in the document if next button is clicked nextCard() will be called
+// prevCard() will be called if prevbutton is clicked
+//'X' is clicked modal window will be closed
+
 document.addEventListener('click', function (e) {
    // console.log(e.target);
     if(e.target.id === 'modal-close-btn' || e.target.textContent === 'X'){
@@ -133,6 +152,7 @@ document.addEventListener('click', function (e) {
 
 });
 
+//displays next active employee card on screen. If there is no next employee card then next button will disappear from modal window
 function nextCard() {
     const nextButton = document.getElementById('modal-next');
     let index = activeCardIds.indexOf(selectedcardId.toString()) +1;
@@ -147,6 +167,7 @@ function nextCard() {
 
 }
 
+//displays previous active employee card on screen. If there is no previous employee card then prev button will disappear from modal window
 function prevCard() {
     const prevButton = document.getElementById('modal-prev');
     let index = activeCardIds.indexOf(selectedcardId.toString()) - 1;
@@ -160,6 +181,7 @@ function prevCard() {
     }
 }
 
+//To close the modal window by deleting modal-container from html
 function closeModal() {
     document.getElementsByClassName('modal-container');
     const lastChild = document.body.lastChild;
