@@ -9,7 +9,7 @@
  * Making API Requests
  * Asynchronously Handling the data using Javascript promises
  
- ####Search feature added:
+ #### Search feature added:
  Now users can search the employees by typing name in the search field. The list will be filtered if any key is pressed or even by clicking search button provided.
  ## How to Use:
  * Clone or download the repository to your computer
