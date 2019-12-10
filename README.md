@@ -17,7 +17,7 @@
  * Then the Guess_the_Phrase javascript game will appear on the default browser tab
  
  ## This was hosted in Git Hub pages:
- https://anilvarma-kav.github.io/Public_API_Requests-/
+ https://anilvarma-kav.github.io/Public_API_Requests/
  
  ## Acknowledgement:
  1. TeamTreehouse [https://teamtreehouse.com/]
