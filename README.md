@@ -15,6 +15,10 @@
  * Clone or download the repository to your computer
  * Open the project root folder and double click on index.html
  * Then the Guess_the_Phrase javascript game will appear on the default browser tab
+ 
+ ## This was hosted in Git Hub pages:
+ https://anilvarma-kav.github.io/Public_API_Requests-/
+ 
  ## Acknowledgement:
  1. TeamTreehouse [https://teamtreehouse.com/]
  2. RANDOM USER GENERATOR API [https://randomuser.me/]
